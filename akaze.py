@@ -8,7 +8,9 @@ args = sys.argv
 
 imglist = []
 
-for root, dirs, files in os.walk(args[1]):
+target_dir = args[1]
+
+for root, dirs, files in os.walk(target_dir):
 	for file in files:
 		if not file.startswith(".") and file.endswith(".jpg"):
 			imglist.append(file)
@@ -19,7 +21,7 @@ deslist = np.empty((0,61),int)
 lenlist = []
 
 for file in imglist:
-	path = os.path.join("imgs",file)
+	path = os.path.join(target_dir,file)
 	img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
 	kp, des = akaze.detectAndCompute(img, None)
 
